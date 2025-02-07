@@ -1,0 +1,16 @@
+.report-container{
+    padding: 1rem;
+    width: min(1024px, 98%);
+    margin: 0 auto;
+}
+.website-container th, .website-container td{
+    padding: 5px;
+}
+table{
+    margin-top: 10px;
+}
+table, th, td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
