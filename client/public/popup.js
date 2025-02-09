@@ -19,27 +19,37 @@ document.getElementById("login").addEventListener("click", async () => {
       throw new Error("Invalid response from server");
     }
 
-    localStorage.setItem("userId", data.user._id);
-    alert("Login successful!");
+    chrome.storage.local.set({ userId: data.user._id });
+
+    updateForm();
+
   } catch (error) {
     console.error("Login error:", error);
     alert(error.message);
   }
 });
 
-document.addEventListener("DOMContentLoaded", () =>{
-  if(localStorage.getItem("userId") != ""){
-    document.getElementById("login-form").style.display = "none";
-  }
-  else{
-    document.getElementById("login-form").style.display = "block";
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  updateForm();
 })
+
+function updateForm() {
+  chrome.storage.local.get(["userId"], (result) => {
+    const userId = result.userId;
+    if (userId) {
+      document.getElementById("login-form").style.display = "none";
+      document.getElementById("user-container").style.display = "block";
+    } else {
+      document.getElementById("login-form").style.display = "block";
+      document.getElementById("user-container").style.display = "none";
+    }
+  });
+}
 
 
 // document.getElementById("viewReport").addEventListener("click", async () => {
 //   console.log("View button clicked");
-  
+
 //   const userId = localStorage.getItem("userId");
 //   const trackingData = JSON.parse(localStorage.getItem("trackingData")) || {}; 
 
@@ -65,8 +75,8 @@ document.addEventListener("DOMContentLoaded", () =>{
 
 
 document.getElementById("logout").addEventListener("click", () => {
-  localStorage.removeItem("userId");
-  alert("Logged out successfully!");
+  chrome.storage.local.remove(["userId"]);
+  updateForm();
 });
 const fetchDailyReport = async (userId) => {
   try {
@@ -121,10 +131,15 @@ const displayReport = (report) => {
 };
 
 document.getElementById('viewReportButton').addEventListener('click', () => {
-  const userId = localStorage.getItem('userId'); // Retrieve the user ID from localStorage
-  if (userId) {
-    fetchDailyReport(userId);
-  } else {
-    alert('User not logged in!');
-  }
+  // const userId = localStorage.getItem('userId'); // Retrieve the user ID from localStorage
+  chrome.storage.local.get(["userId"], (result) => {
+    const userId = result.userId;
+    if (userId) {
+      fetchDailyReport(userId);
+    } else {
+      alert('User not logged in!');
+    }
+  });
+  // Retrieve the user ID from localStorage
+
 });
