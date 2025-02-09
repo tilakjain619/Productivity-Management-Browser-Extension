@@ -1,0 +1,78 @@
+.auth-container{
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+.form-title{
+    margin: 10px 0;
+    margin-bottom: 1.4rem;
+    color: #404040;
+}
+.login-page {
+    width: min(400px, 90%);
+    padding: 8% 0 0;
+    margin: auto;
+}
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    width: 100%;
+    margin: 0 auto 100px;
+    padding: 1.1rem 1.1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(101, 101, 101, 0.462);
+    text-align: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+@media (min-width: 700px){
+    .form{
+        padding: 2rem;
+    }
+}
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    border-radius: 10px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    border-radius: 10px;
+    outline: 0;
+    background: var(--blue);
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    opacity: 0.7;
+}
+
+.form .message {
+    margin: 15px 0 0;
+    color: #979797;
+    font-size: 12px;
+}
+
+.form .message a {
+    color: var(--tomato);
+    text-decoration: none;
+}

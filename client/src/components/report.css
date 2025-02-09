@@ -1,16 +1,82 @@
 .report-container{
-    padding: 1rem;
+    overflow: auto;
     width: min(1024px, 98%);
     margin: 0 auto;
+    /* position: relative; */
+    background-color: white;
+    display: grid;
+    max-height: 500px;
+    gap: 10px;
+    /* padding: 2rem; */
+    border-radius: 10px;
 }
 .website-container th, .website-container td{
     padding: 5px;
 }
-table{
-    margin-top: 10px;
+table {
+    border-spacing: 0 20px; /* Gap between cells */
+    border-collapse: separate; /* Ensure border-spacing works */
 }
-table, th, td{
-    border: 1px solid black;
-    border-collapse: collapse;
-    border-radius: 10px;
+thead{
+    position: sticky;
+    top: -1px;
+}
+th {
+    text-align: left;
+    background-color: var(--green);
+    height: 60px;
+    padding: 0 1rem; /* Padding inside the header cells */
+}
+
+td {
+    border: 6px solid transparent;
+    border-bottom: 1px solid rgba(185, 185, 185, 0.211);
+    padding: 10px; /* Padding inside the data cells */
+}
+.report-title{
+    margin-top: 1rem;
+    padding: 0 10px;
+}
+.delete-btn{
+    background: transparent;
+    outline: none;
+    border: none;
+    color: var(--tomato);
+}
+/* for home page */
+.home-container{
+    text-align: center;
+    display: grid;
+    gap: 15px;
+    padding: 10px;
+    text-wrap: balance;
+    max-width: 700px;
+}
+.home-container h2{
+    font-size: 2rem;
+    text-transform: uppercase;
+}
+.home-container p{
+    color: rgb(30, 29, 29);
+}
+.home-cto{
+    background-color: var(--white);
+    width: fit-content;
+    margin: 2px auto;
+    padding: 10px 1.2rem;
+    border-radius: 50px;
+}
+.home-cto:hover{
+    opacity: 0.8;
+}
+@media (min-width: 800px){
+    .home-container h2{
+        font-size: 3rem;
+    }
+    .home-container p{
+        font-size: 17px;
+    }
+    .home-cto{
+        font-size: 18px;
+    }
 }
