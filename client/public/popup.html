@@ -3,6 +3,7 @@
 
 <head>
     <title>Productivity Tracker</title>
+    <link rel="stylesheet" href="./style.css">
     <script src="popup.js" defer></script>
 </head>
 
@@ -18,10 +19,18 @@
         <button id="logout">Logout</button>
         <!-- <button id="viewReport">View Report</button> -->
         <!-- <button id="clearData">Clear Data</button> -->
+        <button id="viewReportButton">View Daily Report</button>
         <div id="report"></div>
 
-        <div id="reportContainer"></div>
-        <button id="viewReportButton">View Daily Report</button>
+        <div id="reportContainer">Click on above button to view report.</div>
+        <div class="block-container">
+            <h3>Block a Site</h3>
+            <input type="text" id="siteInput" placeholder="Enter site (e.g., facebook.com)">
+            <button id="blockBtn">Block</button>
+
+            <h3>Blocked Sites</h3>
+            <ul id="blockedList"></ul>
+        </div>
     </div>
 
 </body>

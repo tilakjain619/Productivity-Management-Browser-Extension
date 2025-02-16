@@ -46,6 +46,64 @@ function updateForm() {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const siteInput = document.getElementById("siteInput");
+  const blockBtn = document.getElementById("blockBtn");
+  const blockedList = document.getElementById("blockedList");
+
+  let userId = null;
+
+  // Get user ID from local storage
+  chrome.storage.local.get(["userId"], (result) => {
+    userId = result.userId || null;
+    if (userId) fetchBlockedSites();
+  });
+
+  // Fetch blocked sites from backend
+  const fetchBlockedSites = async () => {
+    if (!userId) return;
+    try {
+      const response = await fetch(`http://localhost:5000/api/users/get-user-preferences/${userId}`);
+      const data = await response.json();
+      updateBlockedList(data.blockedSites || []);
+    } catch (error) {
+      console.error("Error fetching blocked sites:", error);
+    }
+  };
+
+  // Block site
+  blockBtn.addEventListener("click", () => {
+    const site = siteInput.value.trim();
+    if (site) {
+      chrome.runtime.sendMessage({ action: "blockSite", site }, () => {
+        siteInput.value = "";
+        fetchBlockedSites();
+      });
+    }
+  });
+
+  // Unblock site
+  blockedList.addEventListener("click", (e) => {
+    if (e.target.classList.contains("remove-btn")) {
+      const site = e.target.dataset.site;
+      chrome.runtime.sendMessage({ action: "unblockSite", site }, () => {
+        fetchBlockedSites();
+      });
+    }
+  });
+
+  // Update blocked sites list in UI
+  function updateBlockedList(sites) {
+    blockedList.innerHTML = "";
+    sites.forEach((site) => {
+      const li = document.createElement("li");
+      li.classList.add("blocked-site");
+      li.innerHTML = `${site} <button class="remove-btn" data-site="${site}">Unblock</button>`;
+      blockedList.appendChild(li);
+    });
+  }
+});
+
 
 // document.getElementById("viewReport").addEventListener("click", async () => {
 //   console.log("View button clicked");
@@ -97,7 +155,7 @@ const fetchDailyReport = async (userId) => {
     alert('There was an error fetching the daily report.');
   }
 };
-const displayReport = (report) => {
+const displayReport = (report) => { 
   const reportContainer = document.getElementById('reportContainer');
   reportContainer.innerHTML = ''; // Clear any previous report
 
@@ -111,17 +169,22 @@ const displayReport = (report) => {
   tableHeader.innerHTML = `
     <tr>
       <th>Website</th>
-      <th>Time Spent (in seconds)</th>
+      <th>Time Spent</th>
     </tr>
   `;
   table.appendChild(tableHeader);
 
   const tableBody = document.createElement('tbody');
   report.forEach((entry) => {
+    const timeSpent = entry.timeSpent;
+    let displayTime = timeSpent < 60 
+      ? `${timeSpent} sec` 
+      : `${(timeSpent / 60).toFixed(0)} min`;
+
     const row = document.createElement('tr');
     row.innerHTML = `
       <td>${entry.website}</td>
-      <td>${entry.timeSpent}</td>
+      <td>${displayTime}</td>
     `;
     tableBody.appendChild(row);
   });

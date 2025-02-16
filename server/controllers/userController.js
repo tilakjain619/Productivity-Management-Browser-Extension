@@ -114,17 +114,25 @@ const getUserPreferences = async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   };
-  // Update user preferences (Blocked Sites)
-const updateUserPreferences = async (req, res) => {
+  const updateUserPreferences = async (req, res) => {
     try {
+      console.log("Received request to update preferences");
+      console.log("User ID:", req.params.userId);
+      console.log("Blocked Sites Data:", req.body.blockedSites);
+  
       const { blockedSites } = req.body;
       const user = await User.findByIdAndUpdate(req.params.userId, { blockedSites }, { new: true });
   
+      console.log("Updated user preferences:", user);
+  
       res.json({ message: "Preferences updated", blockedSites: user.blockedSites });
     } catch (error) {
+      console.error("Error updating user preferences:", error);
       res.status(500).json({ error: error.message });
     }
   };
+  
+  
 const createAccessToken = (payload) => {
     return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: '1d' })
 }
