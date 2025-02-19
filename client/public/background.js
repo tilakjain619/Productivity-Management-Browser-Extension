@@ -36,6 +36,7 @@ const startTracking = () => {
 };
 
 const trackTime = (resetStart) => {
+  if (!currentTab || !startTime) return; // ✅ Prevent null website logging
   if (currentTab && startTime) {
     const endTime = new Date().getTime();
     const timeSpent = Math.round((endTime - startTime) / 1000);

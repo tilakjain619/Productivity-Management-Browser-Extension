@@ -52,7 +52,10 @@ const Report = () => {
     <div className="report-container">
       <h2 className="report-title">Productivity Report</h2>
       {report.length === 0 ? (
-        <p>No data available</p>
+        <div className="empty-report">
+          <p>No data recorded yet. Use our extension to track.</p>
+          <img src="https://jpsr.in/assets/images/nodatafound.gif" alt="No records found" />
+        </div>
       ) : (
         <table className="website-container" width="100%">
           <thead>

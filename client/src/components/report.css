@@ -14,7 +14,7 @@
     padding: 5px;
 }
 table {
-    border-spacing: 0 20px; /* Gap between cells */
+    border-spacing: 0; /* Gap between cells */
     border-collapse: separate; /* Ensure border-spacing works */
 }
 thead{
@@ -24,18 +24,30 @@ thead{
 th {
     text-align: left;
     background-color: var(--green);
-    height: 60px;
-    padding: 0 1rem; /* Padding inside the header cells */
+    /* height: 60px; */
+    padding: 20px 1rem !important; /* Padding inside the header cells */
 }
-
 td {
     border: 6px solid transparent;
-    border-bottom: 1px solid rgba(185, 185, 185, 0.211);
-    padding: 10px; /* Padding inside the data cells */
+    border-bottom: 1px solid rgba(185, 185, 185, 0.521);
+    padding: 20px 1rem !important; /* Padding inside the data cells */
+    font-size: 14px;
 }
 .report-title{
-    margin-top: 1rem;
-    padding: 0 10px;
+    margin-top: 0.6rem;
+    /* margin-left: 1rem; */
+    padding: 6px 15px;
+    font-size: 20px;
+}
+.empty-report{
+    display: grid;
+    place-items: center;
+    color: rgb(100, 100, 100);
+    font-size: 14px;
+    padding: 10px 15px;
+}
+.empty-report img{
+    width: 200px;
 }
 .delete-btn{
     background: transparent;
@@ -49,12 +61,12 @@ td {
     display: grid;
     gap: 15px;
     padding: 10px;
+    width: min(700px, 100%);
     text-wrap: balance;
     max-width: 700px;
 }
 .home-container h2{
     font-size: 2rem;
-    text-transform: uppercase;
 }
 .home-container p{
     color: rgb(30, 29, 29);
@@ -78,5 +90,8 @@ td {
     }
     .home-cto{
         font-size: 18px;
+    }
+    .report-title{
+        font-size: 23px;
     }
 }
