@@ -1,18 +1,5 @@
 # Productivity Management Browser Extension
 
-*Company*: CodTech IT Solutions
-
-*Name*: Tilak Jain
-
-*Intern ID*: CT08OKR
-
-*Domain*: MERN Stack Development
-
-*Duration*: 4 Weeks
-
-*Mentor*: Neela Santosh
-
-
 ## Introduction
 
 This project focuses on developing a Chrome Extension for Productivity Management. The main objective is to create a tool that helps users enhance their productivity by monitoring time spent on various websites, blocking distracting sites, and providing daily productivity reports. The extension utilizes MERN stack to handle frontend and backend functionalities such as tracking websites, storing user preferences and generating reports. This project aims to offer users an effective solution to manage their online activities, boost productivity, and stay focused on their tasks.
